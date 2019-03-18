@@ -3,7 +3,7 @@
 
 typedef struct types
 {
-	char c;
+	char typ;
 	void (*f)();
 }types;
 
