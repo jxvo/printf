@@ -4,8 +4,8 @@
 typedef struct types
 {
 	char typ;
-	void (*f)();
-}types;
+	int (*f)();
+} types;
 
 int _printf(const char *format, ...);
 #endif
