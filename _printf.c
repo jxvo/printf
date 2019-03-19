@@ -3,6 +3,12 @@
 #include <unistd.h>
 #include "holberton.h"
 
+/**
+ * _strlen - finds the length of a string
+ * @s: string to find length of
+ * Return: length
+ */
+
 unsigned int _strlen(char *s)
 {
 	unsigned int x;
@@ -12,21 +18,41 @@ unsigned int _strlen(char *s)
 	return (x);
 }
 
+/**
+ * _putchar - prints a char
+ * @c: char to print
+ * Return: 1
+ */
+
 int _putchar(char c)
 {
-	return(write(1, &c, 1));
+	return (write(1, &c, 1));
 }
+
+/**
+ * print_char - prints char
+ * @param: char to print
+ * @count: length of string
+ * Return: new string length
+ */
 
 int print_char(va_list param, unsigned int count)
 {
 	_putchar(va_arg(param, int));
 	return (++count);
 }
+/**
+ * print_string - prints out a string passed to it char by char
+ * @param: string to print
+ * @count: length of sting
+ * Return: new length
+ */
 
 int print_string(va_list param, unsigned int count)
 {
 	unsigned int x, len;
 	char *print = va_arg(param, char *);
+
 	len = _strlen(print);
 
 	for (x = 0; x < len; x++)
