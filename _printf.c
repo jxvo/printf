@@ -3,6 +3,22 @@
 #include <unistd.h>
 #include "holberton.h"
 
+char *_itoa(int num)
+{
+	int result = num;
+	unsigned int i, size = 0;
+	char *arr;
+
+	while (result)
+	{
+		result = result / 10;
+		size++;
+	}
+	arr = malloc(sizeof
+
+
+}
+/* string length */
 unsigned int _strlen(char *s)
 {
 	unsigned int x;
@@ -72,6 +88,5 @@ int _printf(const char *format, ...)
 				count++;
 		}
 	}
-	printf("Count is: %d\n", count);
 	return (count);
 }
