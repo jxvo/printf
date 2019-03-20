@@ -3,24 +3,12 @@
 #include <unistd.h>
 #include "holberton.h"
 
-/*
-char *_itoa(int num)
-{
-	int result = num;
-	unsigned int i, size = 0;
-	char *arr;
-
-	while (result)
-	{
-		result = result / 10;
-		size++;
-	}
-	arr = malloc();
-
-
-}
-*/
-/* string length */
+/**
+ * _strlen - returns the length of a string
+ * @s: string to measure
+ *
+ * Return: unsigned int length
+ */
 unsigned int _strlen(char *s)
 {
 	unsigned int x;
@@ -30,23 +18,56 @@ unsigned int _strlen(char *s)
 	return (x);
 }
 
+/**
+ * _putchar - write a character to standard output
+ * @c: ascii character to print
+ *
+ * Return: 1 on success
+ */
 int _putchar(char c)
 {
-	return(write(1, &c, 1));
+	return (write(1, &c, 1));
 }
 
+/**
+ * print_sign - prints percents after conversion specifier and increases count
+ * @param: format string to loop through
+ * @count: counter of chars printed
+ *
+ * Return: counter increased by chars printed
+ */
+int print_sign(va_list param __attribute__((unused)), unsigned int count)
+{
+	_putchar('%');
+	return (++count);
+}
+
+/**
+ * print_char - prints a character and increases count
+ * @param: character to print from va_list
+ * @count: counter of chars printed
+ *
+ * Return: counter increased by one
+ */
 int print_char(va_list param, unsigned int count)
 {
 	_putchar(va_arg(param, int));
 	return (++count);
 }
 
+/**
+ * print_string - prints a string and increases count
+ * @param: string to print from va_list
+ * @count: counter of chars printed
+ *
+ * Return: counter increased by string length
+ */
 int print_string(va_list param, unsigned int count)
 {
 	unsigned int x, len = 0;
 	char *print = va_arg(param, char *);
-	len = _strlen(print);
 
+	len = _strlen(print);
 	for (x = 0; x < len; x++)
 	{
 		_putchar(print[x]);
@@ -65,6 +86,7 @@ int _printf(const char *format, ...)
 	types arr[] = {
 		{'c', print_char},
 		{'s', print_string},
+		{'%', print_sign},
 		{'\0', NULL}
 	};
 	va_list list;
@@ -82,27 +104,13 @@ int _printf(const char *format, ...)
 					count = arr[y].f(list, count);
 					x++;
 				}
-				else if (format[x + 1] == '%')
-				{
-					_putchar('%');
-					count++;
-					x++;
-					if (format[x + 2] == arr[y].typ)
-						x--;
-				}
 				else if (format[x + 1] == '\0')
 				{
 					_putchar('%');
 					count++;
-					}
+				}
 			}
-
 		}
-		/*else if (format[x] == ' ')
-		{
-			_putchar(' ');
-			count++;
-			}*/
 		else
 		{
 			_putchar(format[x]);

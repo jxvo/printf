@@ -4,9 +4,10 @@
 
 int main(void)
 {
-       	char space = 'x';
+       	char letter = 'x';
        	char *name = "Holberton";
-	_printf("%%%c\n", space);
+	_printf("%%%c\n", letter);
+	printf("%%%c\n", letter);
 	_printf("Whoa  %s\n", name);
 	return (0);
 }
