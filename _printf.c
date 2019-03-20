@@ -98,6 +98,5 @@ int _printf(const char *format, ...)
 				count++;
 		}
 	}
-	printf("Count is: %d\n", count);
 	return (count);
 }
