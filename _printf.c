@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include "holberton.h"
 
+/*
 char *_itoa(int num)
 {
 	int result = num;
@@ -14,10 +15,11 @@ char *_itoa(int num)
 		result = result / 10;
 		size++;
 	}
-	arr = malloc(sizeof
+	arr = malloc();
 
 
 }
+*/
 /* string length */
 unsigned int _strlen(char *s)
 {
@@ -41,7 +43,7 @@ int print_char(va_list param, unsigned int count)
 
 int print_string(va_list param, unsigned int count)
 {
-	unsigned int x, len;
+	unsigned int x, len = 0;
 	char *print = va_arg(param, char *);
 	len = _strlen(print);
 
@@ -51,6 +53,7 @@ int print_string(va_list param, unsigned int count)
 	}
 	return (count + len);
 }
+
 /**
  * _printf - produces output according to a format
  * @format: string to search through for conversion specifiers, and print
@@ -76,11 +79,30 @@ int _printf(const char *format, ...)
 			{
 				if (format[x + 1] == arr[y].typ)
 				{
-					count += arr[y].f(list, count);
+					count = arr[y].f(list, count);
+					x++;
 				}
+				else if (format[x + 1] == '%')
+				{
+					_putchar('%');
+					count++;
+					x++;
+					if (format[x + 2] == arr[y].typ)
+						x--;
+				}
+				else if (format[x + 1] == '\0')
+				{
+					_putchar('%');
+					count++;
+					}
 			}
-			x++;
+
 		}
+		/*else if (format[x] == ' ')
+		{
+			_putchar(' ');
+			count++;
+			}*/
 		else
 		{
 			_putchar(format[x]);
@@ -88,5 +110,6 @@ int _printf(const char *format, ...)
 				count++;
 		}
 	}
+	printf("Count: %d\n", count);
 	return (count);
 }

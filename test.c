@@ -4,7 +4,9 @@
 
 int main(void)
 {
-	char name = 'F';
-	_printf("%c Holberton\n", name);
+       	char space = 'x';
+       	char *name = "Holberton";
+	_printf("%%%c\n", space);
+	_printf("Whoa  %s\n", name);
 	return (0);
 }
