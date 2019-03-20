@@ -90,7 +90,7 @@ int _printf(const char *format, ...)
 		{'\0', NULL}
 	};
 	va_list list;
-	unsigned int x, y, count = 0;
+	unsigned int x, y, count;
 
 	va_start(list, format);
 	for (x = 0; format != NULL && format[x] != '\0'; x++)
