@@ -1,0 +1,11 @@
+.TH _PRINTF 1
+.SH NAME
+_printf \-- formatted output
+.SH SYNOPSIS
+.B _printf
+.IR format
+[\fiarguments\fR \fI...\fR]
+.SH DESCRIPTION
+the
+.B _printf
+utility formats and prints it arguments
