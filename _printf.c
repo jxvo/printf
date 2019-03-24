@@ -1,6 +1,3 @@
-#include <stdarg.h>
-#include <stdio.h>
-#include <unistd.h>
 #include "holberton.h"
 
 /**
@@ -30,52 +27,6 @@ int _putchar(char c)
 }
 
 /**
- * print_sign - prints percents after conversion specifier and increases count
- * @param: format string to loop through
- * @count: counter of chars printed
- *
- * Return: counter increased by chars printed
- */
-int print_sign(va_list param __attribute__((unused)), unsigned int count)
-{
-	_putchar('%');
-	return (++count);
-}
-
-/**
- * print_char - prints a character and increases count
- * @param: character to print from va_list
- * @count: counter of chars printed
- *
- * Return: counter increased by one
- */
-int print_char(va_list param, unsigned int count)
-{
-	_putchar(va_arg(param, int));
-	return (++count);
-}
-
-/**
- * print_string - prints a string and increases count
- * @param: string to print from va_list
- * @count: counter of chars printed
- *
- * Return: counter increased by string length
- */
-int print_string(va_list param, unsigned int count)
-{
-	unsigned int x, len = 0;
-	char *print = va_arg(param, char *);
-
-	len = _strlen(print);
-	for (x = 0; x < len; x++)
-	{
-		_putchar(print[x]);
-	}
-	return (count + len);
-}
-
-/**
  * _printf - produces output according to a format
  * @format: string to search through for conversion specifiers, and print
  *
@@ -90,33 +41,36 @@ int _printf(const char *format, ...)
 		{'\0', NULL}
 	};
 	va_list list;
-	unsigned int x, y, count;
+	unsigned int x, y, count = 0;
 
+	if (format == NULL)
+		return (-1);
 	va_start(list, format);
-	for (x = 0; format != NULL && format[x] != '\0'; x++)
+	for (x = 0; format[x] != '\0'; x++)
 	{
 		if (format[x] == '%')
 		{
+			if (format[x + 1] == '\0' || format[x + 1] == '\n')
+				if (count == 0)
+					return (-1);
 			for (y = 0; arr[y].typ != '\0'; y++)
 			{
 				if (format[x + 1] == arr[y].typ)
 				{
 					count = arr[y].f(list, count);
 					x++;
-				}
-				else if (format[x + 1] == '\0')
-				{
-					_putchar('%');
-					count++;
+					break;
 				}
 			}
+			if (arr[y].typ == '\0' && format[x + 1] != '\0')
+				count = print_sign(list, count);
 		}
 		else
 		{
 			_putchar(format[x]);
-			if (format[x] != '\n')
-				count++;
+			count++;
 		}
 	}
+	va_end(list);
 	return (count);
 }
